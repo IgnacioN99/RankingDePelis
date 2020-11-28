@@ -41,7 +41,7 @@ public class PruebaDibujo extends JPanel {
 
 		public Papel() {
 			setLayout(new BorderLayout());
-			setPreferredSize(new Dimension(800, 390));
+			setPreferredSize(new Dimension(690, 320));
 			setBackground(Color.WHITE);
 			repaint();
 		}
@@ -54,26 +54,26 @@ public class PruebaDibujo extends JPanel {
 
 			graf.setColor(Color.BLACK); // Color de linea y numeros
 			graf.setStroke(new BasicStroke(3)); // Cambia el grosor de la linea
-			graf.drawLine(180, 280, 625, 280); // Eje X
+			graf.drawLine(123, 280, 568, 280); // Eje X
 			//graf.fillPolygon(new int[] { 625, 641, 626 }, new int[] { 275, 280, 286 }, 3); // Flecha del final eje Y
 
-			graf.drawLine(270, 320, 270, 40); // Eje Y
-			graf.fillPolygon(new int[] { 265, 270, 276 }, new int[] { 50, 34, 50 }, 3); // Flecha del final eje Y
+			graf.drawLine(213, 320, 213, 40); // Eje Y
+			graf.fillPolygon(new int[] { 208, 213, 219 }, new int[] { 50, 34, 50 }, 3); // Flecha del final eje Y
 
 			graf.setFont(fontT);
-			graf.drawString("Viewers", 220, 40);
-			graf.drawString("SCORE", 600, 300);
+			graf.drawString("Viewers", 163, 40);
+			graf.drawString("SCORE", 543, 300);
 
 			graf.setFont(fontE);
-			graf.drawString("0", 320, 310);
-			graf.drawString("1", 370, 310);
-			graf.drawString("2", 420, 310);
-			graf.drawString("3", 470, 310);
-			graf.drawString("4", 520, 310);
-			graf.drawString("5", 570, 310);
+			graf.drawString("0", 263, 310);
+			graf.drawString("1", 313, 310);
+			graf.drawString("2", 363, 310);
+			graf.drawString("3", 413, 310);
+			graf.drawString("4", 463, 310);
+			graf.drawString("5", 513, 310);
 			graf.setStroke(new BasicStroke(2));
 			// Lineas de escala X
-			int j = 326;
+			int j = 269;
 			for (int i = 0; i < 6; i++) {
 				graf.drawLine(j, 280, j, 290);
 				j += 50;
@@ -82,7 +82,7 @@ public class PruebaDibujo extends JPanel {
 			j = 280;
 
 			for (int i = 0; i <= a.size(); i++) {
-				graf.drawLine(265, j, 275, j);
+				graf.drawLine(208, j, 218, j);
 				if (a.size() == 5)
 					j -= 40;
 				else
@@ -95,19 +95,19 @@ public class PruebaDibujo extends JPanel {
 			fontE=new Font("SansSerif", Font.BOLD, 15);
 			graf.setFont(fontE);
 			for (int i = a.size()-1; i >=0; i--) {
-				graf.drawString(String.valueOf(a.get(i)), 210, j);
+				graf.drawString(String.valueOf(a.get(i)), 160, j);
 				if (a.size() == 5)
 					j += 40;
 				else
 					j +=20;
 			}
             graf.setColor(Color.CYAN);//Color del rectangulo
-            graf.fillRect(310, 279-alto0, 30, alto0); 
-            graf.fillRect(360, 279-alto1, 30, alto1);
-            graf.fillRect(410, 279-alto2, 30, alto2);
-            graf.fillRect(460, 279-alto3, 30, alto3);
-            graf.fillRect(510, 279-alto4, 30, alto4);
-            graf.fillRect(560, 279-alto5, 30, alto5);
+            graf.fillRect(253, 279-alto0, 30, alto0); 
+            graf.fillRect(303, 279-alto1, 30, alto1);
+            graf.fillRect(353, 279-alto2, 30, alto2);
+            graf.fillRect(403, 279-alto3, 30, alto3);
+            graf.fillRect(453, 279-alto4, 30, alto4);
+            graf.fillRect(503, 279-alto5, 30, alto5);
             //Se le resta la altura porque se grafica de arriba para abajo.
             //De modo que si aumenta la altura la coordenada Y sube y no traspace el eje X.
 		}

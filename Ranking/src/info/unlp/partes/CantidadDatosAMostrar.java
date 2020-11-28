@@ -61,9 +61,7 @@ public class CantidadDatosAMostrar extends JPanel {
 		aux.add(cant);
 		setLayout(new BorderLayout());
 		add(aux,BorderLayout.NORTH);
-		add(tab,BorderLayout.CENTER);
-		//add(a);
-		
+		add(tab,BorderLayout.CENTER);		
 	}
 
 }

@@ -5,13 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.border.TitledBorder;
-
 import info.unlp.pruebas.LeerArchivo;
 
 public class PanelSuperior extends JPanel {
@@ -25,55 +24,27 @@ public class PanelSuperior extends JPanel {
 		border.setTitleJustification(TitledBorder.CENTER);
 		border.setTitleFont(new Font("SansSerif", Font.BOLD, 20));
 		this.setBorder(border);
-		this.setLayout(new FlowLayout(FlowLayout.RIGHT,50,0));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER,50,0));
 		componentes();
 	}
 
 	public void componentes() {
 		arch.getBarra().setPreferredSize(new Dimension(300, 25));
-		
 		boton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
 					Thread hilo= new Thread(arch);
 					hilo.start();
-					
-					boton.setEnabled(false);
-					
+					boton.setEnabled(false);	
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				;
-				
 			}
 		});
 		add(boton);
 		add(arch.getBarra());
 		
-	}
-	
-
-	class pruebaBarra extends Thread {
-		private JProgressBar algo;// le tengo q cambiar el nombre
-
-		public pruebaBarra(JProgressBar progreso) {
-			this.algo = progreso;
-		}
-
-		@Override
-		public void run() {
-			for (int i = 1; i <= algo.getMaximum(); i++) {
-				algo.setValue(i);
-				try {
-					sleep(5);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 }

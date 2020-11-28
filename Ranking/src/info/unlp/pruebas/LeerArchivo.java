@@ -2,16 +2,13 @@ package info.unlp.pruebas;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-
 import info.unlp.partes.CantidadDatosAMostrar;
 import info.unlp.partes.PanelDatosGenerales;
 
@@ -21,13 +18,12 @@ public class LeerArchivo extends Thread {
 	private static List<Pelicula> list;
 	private int[] ranks = new int[6];
 	private JProgressBar barra = new JProgressBar(0, 100838);
-	private boolean termino = false;
 	private int cantUsuarios = 1, cantPeliculas = 0, votosProcesados = 0, contador = 0;
+
 	@Override
 	public void run() {
 		try {
-			// TODO Auto-generated method stub
-			FileInputStream fstream = new FileInputStream("movies.csv");
+			FileInputStream fstream = new FileInputStream("csv/movies.csv");
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(fstream));
 			String lineaPeliculas = buffer.readLine();
 			hashDePelis = new HashMap<Integer, Pelicula>();
@@ -39,12 +35,12 @@ public class LeerArchivo extends Thread {
 				hashDePelis.put(Integer.parseInt(campos[0]), new Pelicula(campos[1]));
 				lineaPeliculas = buffer.readLine();
 			}
-			fstream = new FileInputStream("ratings.csv");
+			fstream = new FileInputStream("csv/ratings.csv");
 			buffer = new BufferedReader(new InputStreamReader(fstream));
 			String lineaRatings = buffer.readLine();
 			lineaRatings = buffer.readLine();
 			int anteriorUser = Integer.parseInt(lineaRatings.split(Separador)[0]);
-			while (lineaRatings != null) {
+			while (lineaRatings != null ) {
 				String[] campos = lineaRatings.split(Separador);
 				Integer key = Integer.parseInt(campos[1]);
 				int usuario = Integer.parseInt(campos[0]);
@@ -60,8 +56,8 @@ public class LeerArchivo extends Thread {
 				lineaRatings = buffer.readLine();
 				barra.setValue(++contador);
 				barra.repaint();
-				sleep(2);
-				System.out.println(contador);
+				sleep(1);
+				//System.out.println(contador);
 			}
 			PanelDatosGenerales.cargarDatos(cantUsuarios, cantPeliculas, votosProcesados);
 			list = new ArrayList<Pelicula>(hashDePelis.values());
@@ -70,9 +66,8 @@ public class LeerArchivo extends Thread {
 			buffer.close();
 			JOptionPane.showConfirmDialog(null, "se cargaron los archivos", "yay", JOptionPane.PLAIN_MESSAGE,
 					JOptionPane.INFORMATION_MESSAGE);
-			termino = true;
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e) { // Pongo exeption para poder tomar tanto la IO como Interrupted en un solo try
+			e.printStackTrace();
 		}
 
 	}
@@ -115,12 +110,11 @@ public class LeerArchivo extends Thread {
 			this.ranks[5]++;
 		}
 	}
-	public boolean getTermino() {
-		return termino;
-	}
+
 	public JProgressBar getBarra() {
 		return barra;
 	}
+
 	public static List<Pelicula> getListaPelis() {
 		return list;
 	}
