@@ -15,19 +15,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class PruebaDibujo extends JPanel {
+public class Histograma extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int alto0 = 0, alto1 = 0, alto2 = 0, alto3 = 0, alto4 = 0, alto5 = 0;
-	private List<Integer> a = new LinkedList<Integer>();
+	private List<Integer> alturasGraf = new LinkedList<Integer>();
 
-	public PruebaDibujo() {
-		// TODO Auto-generated constructor stub
+	public Histograma() {
 		String title = "HISTOGRAMA";
 		TitledBorder border = BorderFactory.createTitledBorder(title);
 		border.setTitleJustification(TitledBorder.CENTER);
 		border.setTitleFont(new Font("SansSerif", Font.BOLD, 20));
 		for (int i = 1; i <= 5; i++) {
-			a.add(i*1000);
+			alturasGraf.add(i*1000);
 		}
 		this.setBorder(border);
 		this.setLayout(new FlowLayout());
@@ -81,22 +80,22 @@ public class PruebaDibujo extends JPanel {
 
 			j = 280;
 
-			for (int i = 0; i <= a.size(); i++) {
+			for (int i = 0; i <= alturasGraf.size(); i++) {
 				graf.drawLine(208, j, 218, j);
-				if (a.size() == 5)
+				if (alturasGraf.size() == 5)
 					j -= 40;
 				else
 					j = j-20;
 			}
-			if (a.size() == 5)
+			if (alturasGraf.size() == 5)
 				j += 40;
 			else
 				j +=20;
 			fontE=new Font("SansSerif", Font.BOLD, 15);
 			graf.setFont(fontE);
-			for (int i = a.size()-1; i >=0; i--) {
-				graf.drawString(String.valueOf(a.get(i)), 160, j);
-				if (a.size() == 5)
+			for (int i = alturasGraf.size()-1; i >=0; i--) {
+				graf.drawString(String.valueOf(alturasGraf.get(i)), 160, j);
+				if (alturasGraf.size() == 5)
 					j += 40;
 				else
 					j +=20;
@@ -117,10 +116,10 @@ public class PruebaDibujo extends JPanel {
 
 	public void setAlturas(int[] ranks) {
 		int max = obtenerMax(ranks);
-		a.clear();
+		alturasGraf.clear();
 		if (max > 5000) {
 			for (int i = 3000; i <= 33000; i = i+3000) {
-				a.add(i);
+				alturasGraf.add(i);
 			}
 			 for (int b = 0; b < ranks.length; b++) {
 				 if(ranks[b]>33000)
@@ -129,7 +128,7 @@ public class PruebaDibujo extends JPanel {
 			 }
 		} else if (max <= 220) {
 			for (int i = 20; i <= 220; i =i +20) {
-				a.add(i);
+				alturasGraf.add(i);
 			}
 		}
 

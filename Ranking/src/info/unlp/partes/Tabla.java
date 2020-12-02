@@ -10,8 +10,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import info.unlp.pruebas.LeerArchivo;
-import info.unlp.pruebas.Pelicula;
+import info.unlp.lector.LeerArchivo;
+import info.unlp.lector.Pelicula;
 
 public class Tabla extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class Tabla extends JPanel {
 		return tabla;
 	}
 
-	public Tabla() {
+	public Tabla(Histograma p) {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(500, 100));
 		DefaultTableModel modelo = new DefaultTableModel(titulo, 0);
@@ -37,13 +37,13 @@ public class Tabla extends JPanel {
 			      JTable celdaSelect = (JTable)e.getSource();
 			      int row = celdaSelect.getSelectedRow();
 			      Pelicula aux = LeerArchivo.getListaPelis().get(row);
-			      CantidadDatosAMostrar.getP().setAlturas(aux.getVotos());
+			      p.setAlturas(aux.getVotos());
 			    }
 			  }
 			});
 		
-		JScrollPane a = new JScrollPane(tabla);
-		a.setPreferredSize(getPreferredSize());
-		add(a, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(tabla);
+		scrollPane.setPreferredSize(getPreferredSize());
+		add(scrollPane, BorderLayout.CENTER);
 	}
 }

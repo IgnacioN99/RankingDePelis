@@ -11,7 +11,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-import info.unlp.pruebas.LeerArchivo;
+
+import info.unlp.lector.LeerArchivo;
 
 public class PanelSuperior extends JPanel {
 

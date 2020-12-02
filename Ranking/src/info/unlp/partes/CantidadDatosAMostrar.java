@@ -9,19 +9,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import info.unlp.pruebas.LeerArchivo;
-import info.unlp.pruebas.Pelicula;
+
+import info.unlp.lector.LeerArchivo;
+import info.unlp.lector.Pelicula;
 
 public class CantidadDatosAMostrar extends JPanel {
 	private String[] titulo = { "Nombre", "Usuarios", "Votos" };
 	private JLabel labelResultados;
-	private Tabla tab= new Tabla();
 	private  JComboBox<String> cant;
 	private static final long serialVersionUID = 1L;
-	private static PruebaDibujo p = new PruebaDibujo();
+	private Histograma grafico = new Histograma();
+	private Tabla tabla= new Tabla(grafico);
 
-	public static PruebaDibujo getP() {
-		return p;
+	public Histograma getPintura() {
+		return grafico;
 	}
 
 	public CantidadDatosAMostrar() {
@@ -47,7 +48,7 @@ public class CantidadDatosAMostrar extends JPanel {
 						contador++;
 						
 					}
-					tab.getTabla().setModel(modelo);
+					tabla.getTabla().setModel(modelo);
 				} catch (Exception ex) {
 					JOptionPane.showConfirmDialog(null, "No se cargaron los archivos", "ERROR",
 							JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
@@ -61,7 +62,7 @@ public class CantidadDatosAMostrar extends JPanel {
 		aux.add(cant);
 		setLayout(new BorderLayout());
 		add(aux,BorderLayout.NORTH);
-		add(tab,BorderLayout.CENTER);		
+		add(tabla,BorderLayout.CENTER);		
 	}
 
 }

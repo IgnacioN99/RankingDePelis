@@ -1,7 +1,6 @@
-package info.unlp.pruebas;
+package info.unlp.lector;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-import info.unlp.partes.CantidadDatosAMostrar;
-import info.unlp.partes.PanelDatosGenerales;
+
+import info.unlp.Frame;
 
 public class LeerArchivo extends Thread {
 	public final String Separador = ",";
@@ -23,8 +22,7 @@ public class LeerArchivo extends Thread {
 	@Override
 	public void run() {
 		try {
-			FileInputStream fstream = new FileInputStream("csv/movies.csv");
-			BufferedReader buffer = new BufferedReader(new InputStreamReader(fstream));
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("movies.csv")));
 			String lineaPeliculas = buffer.readLine();
 			hashDePelis = new HashMap<Integer, Pelicula>();
 			lineaPeliculas = buffer.readLine();// No tomo en cuenta la primera linea
@@ -35,8 +33,7 @@ public class LeerArchivo extends Thread {
 				hashDePelis.put(Integer.parseInt(campos[0]), new Pelicula(campos[1]));
 				lineaPeliculas = buffer.readLine();
 			}
-			fstream = new FileInputStream("csv/ratings.csv");
-			buffer = new BufferedReader(new InputStreamReader(fstream));
+			buffer = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv")));
 			String lineaRatings = buffer.readLine();
 			lineaRatings = buffer.readLine();
 			int anteriorUser = Integer.parseInt(lineaRatings.split(Separador)[0]);
@@ -59,10 +56,10 @@ public class LeerArchivo extends Thread {
 				sleep(1);
 				//System.out.println(contador);
 			}
-			PanelDatosGenerales.cargarDatos(cantUsuarios, cantPeliculas, votosProcesados);
+			Frame.getInstance().getDatosGen().cargarDatos(cantUsuarios, cantPeliculas, votosProcesados);
 			list = new ArrayList<Pelicula>(hashDePelis.values());
 			Collections.sort(list);
-			CantidadDatosAMostrar.getP().setAlturas(ranks);
+			Frame.getInstance().getCant().getPintura().setAlturas(ranks);
 			buffer.close();
 			JOptionPane.showConfirmDialog(null, "se cargaron los archivos", "yay", JOptionPane.PLAIN_MESSAGE,
 					JOptionPane.INFORMATION_MESSAGE);

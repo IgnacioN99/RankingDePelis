@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 public class PanelDatosGenerales extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static JLabel L1;
-	private static JLabel L2;
-	private static JLabel L3;
+	private  JLabel L1;
+	private  JLabel L2;
+	private  JLabel L3;
 	private JLabel Linf;
 	private Dimension tamanio = new Dimension(300, 50);
 	public PanelDatosGenerales() {
@@ -58,7 +58,7 @@ public class PanelDatosGenerales extends JPanel {
 		Linf.setPreferredSize(tamanio);
 		this.add(Linf);
 	}
-	public static void cargarDatos(int...s) {
+	public void cargarDatos(int...s) {
 		L1.setText(Integer.toString(s[0]));
 		L2.setText(Integer.toString(s[1]));
 		L3.setText(Integer.toString(s[2]));

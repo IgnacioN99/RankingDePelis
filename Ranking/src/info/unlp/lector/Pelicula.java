@@ -1,4 +1,4 @@
-package info.unlp.pruebas;
+package info.unlp.lector;
 
 public class Pelicula implements Comparable<Pelicula> {
 	private double cantVotos = 0;
