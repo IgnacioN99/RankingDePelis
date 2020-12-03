@@ -126,10 +126,19 @@ public class Histograma extends JPanel {
 					 ranks[b]=34000;
 				 ranks[b]=ranks[b]*20/3000;
 			 }
-		} else if (max <= 220) {
+		} else if (max > 20&&max <= 220) {
 			for (int i = 20; i <= 220; i =i +20) {
 				alturasGraf.add(i);
 			}
+		}else if(max<=20) {
+			for (int i = 2; i <= 22; i = i+2) {
+				alturasGraf.add(i);
+			}
+			 for (int b = 0; b < ranks.length; b++) {
+				 if(ranks[b]>22)
+					 ranks[b]=25;
+				 ranks[b]=ranks[b]*20/2;
+			 }
 		}
 
 		alto0 = ranks[0];

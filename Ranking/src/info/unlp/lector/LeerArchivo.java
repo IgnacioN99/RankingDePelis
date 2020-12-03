@@ -1,6 +1,7 @@
 package info.unlp.lector;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +17,8 @@ public class LeerArchivo extends Thread {
 	private HashMap<Integer, Pelicula> hashDePelis;
 	private static List<Pelicula> list;
 	private int[] ranks = new int[6];
-	private JProgressBar barra = new JProgressBar(0, 100838);
-	private int cantUsuarios = 1, cantPeliculas = 0, votosProcesados = 0, contador = 0;
+	private JProgressBar barra = new JProgressBar();
+	private int cantUsuarios = 1, cantPeliculas = 0, votosProcesados = 0;
 
 	@Override
 	public void run() {
@@ -34,6 +35,7 @@ public class LeerArchivo extends Thread {
 				lineaPeliculas = buffer.readLine();
 			}
 			buffer = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv")));
+			barra.setMaximum(contarLineas(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv"))))-1);//el -1 es porque no tomo en cuenta la linea de definiciones de el csv
 			String lineaRatings = buffer.readLine();
 			lineaRatings = buffer.readLine();
 			int anteriorUser = Integer.parseInt(lineaRatings.split(Separador)[0]);
@@ -51,11 +53,12 @@ public class LeerArchivo extends Thread {
 				hashDePelis.get(key).setCantUsuarios();
 				hashDePelis.get(key).setCantVotos(voto);
 				lineaRatings = buffer.readLine();
-				barra.setValue(++contador);
+				barra.setValue(votosProcesados);
 				barra.repaint();
 				sleep(1);
 				//System.out.println(contador);
 			}
+			//System.out.println(votosProcesados);
 			Frame.getInstance().getDatosGen().cargarDatos(cantUsuarios, cantPeliculas, votosProcesados);
 			list = new ArrayList<Pelicula>(hashDePelis.values());
 			Collections.sort(list);
@@ -68,8 +71,24 @@ public class LeerArchivo extends Thread {
 		}
 
 	}
+	private int contarLineas(BufferedReader buffer) {
+		BufferedReader aux=buffer;
+		int ret=0;
+		try {
+			String linea=aux.readLine();
+			while (linea!=null) {
+				linea=aux.readLine();
+				ret++;
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//System.out.println(ret);
+		return ret;
+	}
 
-	public String[] textoEntero(String linea, String[] campos) {
+	private String[] textoEntero(String linea, String[] campos) {
 		char[] caracteres = linea.toCharArray();
 		String[] ret = new String[3];
 		ret[0] = campos[0];
@@ -92,7 +111,7 @@ public class LeerArchivo extends Thread {
 		return ret;
 	}
 
-	public void ranks(double voto) {
+	private void ranks(double voto) {
 		if (voto == 0 && voto < 0.5) {
 			this.ranks[0]++;
 		} else if (voto >= 0.5 && voto < 1.5) {
