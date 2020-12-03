@@ -35,8 +35,8 @@ public class Tabla extends JPanel {
 			  public void mouseClicked(MouseEvent e) {
 			    if (e.getClickCount() == 1) {
 			      JTable celdaSelect = (JTable)e.getSource();
-			      int row = celdaSelect.getSelectedRow();
-			      Pelicula aux = LeerArchivo.getListaPelis().get(row);
+			      int fila = celdaSelect.getSelectedRow();
+			      Pelicula aux = LeerArchivo.getListaPelis().get(fila);
 			      p.setAlturas(aux.getVotos());
 			    }
 			  }

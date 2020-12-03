@@ -35,7 +35,7 @@ public class LeerArchivo extends Thread {
 				lineaPeliculas = buffer.readLine();
 			}
 			buffer = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv")));
-			barra.setMaximum(contarLineas(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv"))))-1);//el -1 es porque no tomo en cuenta la linea de definiciones de el csv
+			barra.setMaximum(contarLineas()-1);//el -1 es porque no tomo en cuenta la linea de definiciones de el csv
 			String lineaRatings = buffer.readLine();
 			lineaRatings = buffer.readLine();
 			int anteriorUser = Integer.parseInt(lineaRatings.split(Separador)[0]);
@@ -71,8 +71,8 @@ public class LeerArchivo extends Thread {
 		}
 
 	}
-	private int contarLineas(BufferedReader buffer) {
-		BufferedReader aux=buffer;
+	private int contarLineas() {
+		BufferedReader aux=new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ratings.csv")));;
 		int ret=0;
 		try {
 			String linea=aux.readLine();
@@ -81,6 +81,7 @@ public class LeerArchivo extends Thread {
 				ret++;
 				
 			}
+			aux.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +102,7 @@ public class LeerArchivo extends Thread {
 				}
 				segundaAparicion++;
 			} else {
-				if (caracteres[i] == ',' && segundaAparicion != 1) // hardcoding foerte tengo q cambiarlo
+				if (caracteres[i] == ',' && segundaAparicion != 1) 
 					break;
 				ret[1] = ret[1] + caracteres[i];
 			}

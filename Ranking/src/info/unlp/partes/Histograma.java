@@ -25,7 +25,7 @@ public class Histograma extends JPanel {
 		TitledBorder border = BorderFactory.createTitledBorder(title);
 		border.setTitleJustification(TitledBorder.CENTER);
 		border.setTitleFont(new Font("SansSerif", Font.BOLD, 20));
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 11; i++) {
 			alturasGraf.add(i*1000);
 		}
 		this.setBorder(border);
@@ -54,7 +54,6 @@ public class Histograma extends JPanel {
 			graf.setColor(Color.BLACK); // Color de linea y numeros
 			graf.setStroke(new BasicStroke(3)); // Cambia el grosor de la linea
 			graf.drawLine(123, 280, 568, 280); // Eje X
-			//graf.fillPolygon(new int[] { 625, 641, 626 }, new int[] { 275, 280, 286 }, 3); // Flecha del final eje Y
 
 			graf.drawLine(213, 320, 213, 40); // Eje Y
 			graf.fillPolygon(new int[] { 208, 213, 219 }, new int[] { 50, 34, 50 }, 3); // Flecha del final eje Y
@@ -77,38 +76,28 @@ public class Histograma extends JPanel {
 				graf.drawLine(j, 280, j, 290);
 				j += 50;
 			}
-
+			// Lineas de escala Y
 			j = 280;
-
 			for (int i = 0; i <= alturasGraf.size(); i++) {
 				graf.drawLine(208, j, 218, j);
-				if (alturasGraf.size() == 5)
-					j -= 40;
-				else
 					j = j-20;
 			}
-			if (alturasGraf.size() == 5)
-				j += 40;
-			else
 				j +=20;
 			fontE=new Font("SansSerif", Font.BOLD, 15);
 			graf.setFont(fontE);
 			for (int i = alturasGraf.size()-1; i >=0; i--) {
 				graf.drawString(String.valueOf(alturasGraf.get(i)), 160, j);
-				if (alturasGraf.size() == 5)
-					j += 40;
-				else
 					j +=20;
 			}
-            graf.setColor(Color.CYAN);//Color del rectangulo
+			//Rectangulo
+            graf.setColor(Color.CYAN);
             graf.fillRect(253, 279-alto0, 30, alto0); 
             graf.fillRect(303, 279-alto1, 30, alto1);
             graf.fillRect(353, 279-alto2, 30, alto2);
             graf.fillRect(403, 279-alto3, 30, alto3);
             graf.fillRect(453, 279-alto4, 30, alto4);
             graf.fillRect(503, 279-alto5, 30, alto5);
-            //Se le resta la altura porque se grafica de arriba para abajo.
-            //De modo que si aumenta la altura la coordenada Y sube y no traspace el eje X.
+        
 		}
 
 		
@@ -117,16 +106,21 @@ public class Histograma extends JPanel {
 	public void setAlturas(int[] ranks) {
 		int max = obtenerMax(ranks);
 		alturasGraf.clear();
-		if (max > 5000) {
-			for (int i = 3000; i <= 33000; i = i+3000) {
+		if (max > 4000) {
+			for (int i = 4000; i <= 44000; i = i+4000) {
 				alturasGraf.add(i);
 			}
 			 for (int b = 0; b < ranks.length; b++) {
-				 if(ranks[b]>33000)
-					 ranks[b]=34000;
-				 ranks[b]=ranks[b]*20/3000;
+				 ranks[b]=ranks[b]*20/4000;
 			 }
-		} else if (max > 20&&max <= 220) {
+		}else if(max > 200&&max <= 4000) {
+			for (int i = 300; i <= 3300; i = i+300) {
+				alturasGraf.add(i);
+			}
+			 for (int b = 0; b < ranks.length; b++) {
+				 ranks[b]=ranks[b]*20/300;
+			 }
+		}else if (max > 20&&max <= 220) {
 			for (int i = 20; i <= 220; i =i +20) {
 				alturasGraf.add(i);
 			}
@@ -152,6 +146,7 @@ public class Histograma extends JPanel {
 		repaint();
 
 	}
+	
 
 	private int obtenerMax(int[] ranks) {
 		int max = 0;
