@@ -29,6 +29,7 @@ public class CantidadDatosAMostrar extends JPanel {
 		labelResultados = new JLabel("Cantidad de resultados a mostrar");
 		String[] myNum = {"0", "5", "10", "20", "100", "1000", "TODOS" };
 		cant = new JComboBox<String>(myNum);
+		
 		cant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

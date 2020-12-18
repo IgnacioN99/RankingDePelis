@@ -91,12 +91,13 @@ public class Histograma extends JPanel {
 			}
 			//Rectangulo
             graf.setColor(Color.CYAN);
-            graf.fillRect(253, 279-alto0, 30, alto0); 
-            graf.fillRect(303, 279-alto1, 30, alto1);
-            graf.fillRect(353, 279-alto2, 30, alto2);
-            graf.fillRect(403, 279-alto3, 30, alto3);
+            graf.fillRect(253, 279-alto0, 30, alto0);//Dejamos una altura base
+            graf.fillRect(303, 279-alto1, 30, alto1);// la cual se va actualizando
+            graf.fillRect(353, 279-alto2, 30, alto2);//con el cambio de los valores en
+            graf.fillRect(403, 279-alto3, 30, alto3);//celeste
             graf.fillRect(453, 279-alto4, 30, alto4);
             graf.fillRect(503, 279-alto5, 30, alto5);
+          //Se le resta la altura porque se grafica de arriba para abajo.
         
 		}
 

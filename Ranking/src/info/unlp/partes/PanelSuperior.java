@@ -29,7 +29,7 @@ public class PanelSuperior extends JPanel {
 		componentes();
 	}
 
-	public void componentes() {
+	private void componentes() {
 		arch.getBarra().setPreferredSize(new Dimension(300, 25));
 		boton.addActionListener(new ActionListener() {
 			@Override
@@ -45,7 +45,6 @@ public class PanelSuperior extends JPanel {
 		});
 		add(boton);
 		add(arch.getBarra());
-		
 	}
 
 }

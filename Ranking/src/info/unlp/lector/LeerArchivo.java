@@ -19,6 +19,7 @@ public class LeerArchivo extends Thread {
 	private int[] ranks = new int[6];
 	private JProgressBar barra = new JProgressBar();
 	private int cantUsuarios = 1, cantPeliculas = 0, votosProcesados = 0;
+	
 
 	@Override
 	public void run() {
